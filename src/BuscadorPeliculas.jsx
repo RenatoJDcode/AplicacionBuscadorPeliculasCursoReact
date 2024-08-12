@@ -1,9 +1,10 @@
 import { useState } from "react"
 
+const apikey = import.meta.env.VITE_API_KEY
+
 export const BuscadorPeliculas = () => {
 
   const urlBase = 'https://api.themoviedb.org/3/search/movie'
-  const API_KEY = 'INSERT_YOUR_API_KEY'
 
   const [busqueda, setBusqueda] = useState('')
   const [peliculas, setPeliculas] = useState([])
@@ -18,7 +19,7 @@ export const BuscadorPeliculas = () => {
 
   const fetchPeliculas = async () => {
     try {
-      const response = await fetch(`${urlBase}?query=${busqueda}&api_key=${API_KEY}`)
+      const response = await fetch(`${urlBase}?query=${busqueda}&api_key=${apikey}`)
       const data = await response.json()
       console.log(data.results)
       setPeliculas(data.results)
@@ -34,7 +35,7 @@ export const BuscadorPeliculas = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Escribí una película"
+          placeholder="Escribe una película"
           value={busqueda}
           onChange={handleInputChange}
         />
